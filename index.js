@@ -1,26 +1,21 @@
-// Write your code here!
-fetch('https://jsonplaceholder.typicode.com/todos/1');
 async function getPosts() {
-  try {
-    const response = await fetch('https://typicode.com');
-    const posts = await response.json();
-    
-    // Call the display function after successful fetch
-    displayPosts(posts);
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
+  const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+  const posts = await response.json();
+  displayPosts(posts);
 }
-
-// 2. Function to Display Posts
-function displayPosts(postsList) {
-  const ul = document.getElementById('post-list');
-
-  // Loop through the posts list
-  postsList.forEach(post => {
-    // 3. Within the loop:
+function displayPosts(posts) {
+  const postList = document.getElementById('post-list');
+  posts.forEach(post => {
     const li = document.createElement('li');
     const h1 = document.createElement('h1');
     const p = document.createElement('p');
-});
+
+    h1.textContent = post.title;
+    p.textContent = post.body;
+
+    li.appendChild(h1);
+    li.appendChild(p);
+    postList.appendChild(li);
+  });
 }
+getPosts();
